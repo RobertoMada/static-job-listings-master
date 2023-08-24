@@ -1,0 +1,205 @@
+/* CSS Reset */
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+    font: inherit;
+    list-style-type: none;
+    padding: 0;
+    text-decoration: none;
+  }
+  /*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+  html,
+  body{
+    height: 100%;
+  }
+  
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  /*
+    5. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  /*
+    6. Remove built-in form typography styles
+  */
+  /*
+    7. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* CSS Reset */
+
+:root{
+    --primary-dark-cyan: hsl(180, 29%, 50%);
+    --neutral-background: hsl(180, 52%, 96%);
+    --neutral-filter-tablets: hsl(180, 31%, 95%);
+    --neutral-dark-cyan: hsl(180, 8%, 52%);
+    --neutral-very-dark-cyan: hsl(180, 14%, 20%);
+
+    --fs-400: 1rem;
+    
+    --ff-basic: 'League Spartan', sans-serif;
+    --fw-regular: 500;
+    --fw-bold: 700;
+
+    --size-100: 0.25rem;
+    --size-200: 0.5rem;
+    --size-300: 0.75rem;
+    --size-400: 1rem;
+    --size-500: 1.5rem;
+    --size-600: 2rem;
+    --size-650: 2.5rem;
+    --size-700: 3rem;
+    --size-800: 4rem;
+    --size-900: 5rem;
+
+}
+
+/* General styling */
+header{
+  height: 18vh;
+  background: url(images/bg-header-mobile.svg) top no-repeat;
+  background-size: cover;
+  background-color: var(--primary-dark-cyan);
+}
+
+@media(min-width: 768px){
+  header{
+    background-image: url(images/bg-header-desktop.svg);
+  }
+}
+
+body{
+  background-color: var(--neutral-background);
+  font-family: var(--ff-basic);
+  font-size: var(--fs-400);
+  color: var(--neutral-dark-cyan);
+  font-weight: var(--fw-regular);
+}
+
+main{
+  padding: 2rem 4rem;
+}
+/* General styling */
+
+/* Utilities class */
+
+.fw-bold{
+  font-weight: var(--fw-bold);
+}
+.fw-regular{
+  font-weight: var(--fw-regular);
+}
+
+.flex-box{
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px){
+  .flex-box{
+    flex-direction: row;
+    align-items: center;
+    padding: 1.25rem;
+  }
+}
+
+.job-container{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tablet-container{
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 1rem;
+}
+
+@media (max-width: 768px){
+  .tablet-container{
+    border-top: 1px solid var(--neutral-dark-cyan);
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+.filter-tablet{
+  background-color: var(--neutral-filter-tablets);
+  color: var(--primary-dark-cyan);
+  font-weight: var(--fw-bold);
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+}
+
+.filter-tablet:hover{
+  background-color: var(--primary-dark-cyan);
+  color: var(--neutral-background);
+}
+
+.company{
+  color: var(--primary-dark-cyan);
+  font-weight: bold;
+  
+}
+
+.position{
+  color: var(--neutral-very-dark-cyan);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}
+
+.position:hover{
+  color: var(--primary-dark-cyan);
+}
+
+
+.grid-box{
+  display: grid;
+  gap: 0.5rem;
+}
+
+.new{
+  background-color: var(--primary-dark-cyan);
+  color: #FFFFFF;
+  padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.featured{
+  background-color: var(--neutral-very-dark-cyan);
+  color: #FFFFFF;
+  padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+  border-radius: 1rem;
+}
+
+/* Utilities class */
