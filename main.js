@@ -1,4 +1,9 @@
 let obj;
+let filterArr = [];
+let jobFiltered;
+const filterContainer = document.querySelector('.filter-container');
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', resetFilters);
 
 async function populate() {
     const requestURL =
@@ -6,26 +11,16 @@ async function populate() {
   
     const response = await fetch(requestURL);
     obj = await response.json();
-    console.log(obj);
     displayJobs(obj);
   }
 
   function displayJobs(jobs){
     const main = document.getElementsByTagName('main')[0];
-    
-    
-    
-   
-    
-    
-   
-    
-    
-    
-   
+
     for(const job of jobs){
       const flexBox = document.createElement('div');
       flexBox.classList.add('flex-box');
+      flexBox.classList.add('slide-in-left');
       main.appendChild(flexBox);
       const jobContainer = document.createElement('div');
       jobContainer.classList.add('job-container');
@@ -96,14 +91,87 @@ async function populate() {
         }
     }
 
+    addEventToFilter();
+
   }
 
   populate();
 
-  const filter = document.querySelector('.filter');
+function addEventToFilter(){
+    const selectFilter = document.querySelectorAll('.filter-tablet');
+  selectFilter.forEach((filter) => {
+  filter.addEventListener('click', addFilter)
+});
+};
 
-  filter.addEventListener('click', function(e){
-    console.log('ee');
-  })
+function addFilter(e){
+  let text = e.target.textContent;
+  if(!filterArr.includes(text)){
+    filterArr.push(text);
+    displayFilter(text);
+    recursiveFilter();
+    resetDisplay();
+    displayJobs(jobFiltered);
+  }
+  if(filterArr.length >= 1){
+    filterContainer.classList.remove('hidden');
+  }
+}
+
+function displayFilter(filter){
+  const buton = document.createElement('button');
+  buton.textContent = filter;
+  buton.classList.add('filter')
+  filterContainer.firstElementChild.appendChild(buton);
+  buton.addEventListener('click', removeFilter);
+}
+
+function resetFilters(){
+  filterArr = [];
+  filterContainer.classList.add('hidden');
+  while(filterContainer.firstElementChild.hasChildNodes()){
+    filterContainer.firstElementChild.removeChild(filterContainer.firstElementChild.firstChild);
+  }
+  resetDisplay();
+  displayJobs(obj);
+}
+
+function removeFilter(e){
+  e.target.remove();
+  filterArr = filterArr.filter((word) => word !== e.target.textContent);
+  if(filterArr.length === 0){
+    filterContainer.classList.add('hidden');
+  }
+  recursiveFilter();
+  resetDisplay();
+  displayJobs(jobFiltered);
+}
+
+function recursiveFilter(){
+  jobFiltered = Array.from(obj);
+  for(let i = 0; i < filterArr.length; i++){
+    jobFiltered = jobFiltered.filter((job) => {
+      if(job.role === filterArr[i] || job.level === filterArr[i] ){
+        return true;
+      }
+      for(const lang of job.languages){
+        if(lang === filterArr[i]){
+          return true;
+        }
+      }
+      for(const tool of job.tools){
+        if(tool === filterArr[i]){
+          return true;
+        }
+      }
+    });
+  }
+}
 
 
+function resetDisplay(){
+  const flexBox = document.querySelectorAll('.flex-box');
+  for(const element of flexBox){
+    element.remove();
+  }
+}
